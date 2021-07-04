@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="getAllArticle()">
+
+<div class="container">
+    <div id="header">
+        <div id="menu">
+            <ul class="title">
+                <li><a href="# ">首页</a></li>
+                <li><a href="# ">博客</a></li>
+                <li><a href="https://www.github.com">GitHub</a></li>
+                <li><a href="https://www.gitee.com">码云</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="main">
+        <div id="title" class="content">
+            <p class="articleTitle"></p>
+        </div>
+        <div class="content"  id="intro">
+            <p class="articleIntro" style="font-size: 25px; "></p>
+        </div>
+        <div class="content" id="text">
+            <p class="articleText"></p>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
+<script>
+
+  function getAllArticle () {
+    let url = location.search
+    let id = url.substr(4)
+    console.log('id' + id)
+    let xmlhttp
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest()
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject('Microsoft.XMLHTTP ')
+    }
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        articles = JSON.parse(xmlhttp.responseText)
+        console.log(articles)
+        let x = document.getElementsByClassName('articleIntro')
+        let y = document.getElementsByClassName('articleTitle')
+        let z = document.getElementsByClassName('articleText')
+        console.log("articles.articleIntro"+articles.articleIntro)
+        x[0].innerHTML = articles.articleIntro
+        y[0].innerHTML = articles.articleTitle
+        z[0].innerHTML = articles.articleText
+      }
+    }
+    xmlhttp.open('GET', 'http://localhost:4567/article/' + id, true)
+    xmlhttp.send()
+  }
+</script>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #FAACA8;
+        background-image: linear-gradient(315deg, #FAACA8 0%, #DDD6F3 100%);
+    }
+
+    #container {
+        width: 1349px;
+        height: 1500px;
+        margin-bottom: 0;
+        background-color: #FAACA8;
+        background-image: linear-gradient(315deg, #FAACA8 0%, #DDD6F3 100%);
+    }
+
+    #header {
+        height: 50px;
+        width: 1349px;
+        background-color: #D9AFD9;
+        background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #header .title li {
+        height: 50px;
+        line-height: 50px;
+        font-size: 15px;
+        margin-left: 20px;
+        margin-right: 10px;
+        list-style-type: none;
+        float: left;
+    }
+
+    .title li a:link {
+        color: black;
+        text-decoration: none;
+    }
+
+    .title li a:hover {
+        color: red;
+    }
+    .title p{
+        font-size: 30px;
+    }
+
+    #header .subtitle li {
+        height: 50px;
+        line-height: 50px;
+        float: left;
+        list-style-type: none;
+        font-size: 15px;
+        margin-right: 10px;
+        color: black;
+    }
+
+    #main {
+        width: 1349px;
+        height: 1500px;
+
+
+    }
+
+    #title {
+
+        background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        font-size: 30px;
+        text-align: center;
+        /*height: 100px;*/
+    }
+
+    .content {
+        /*height: 200px;*/
+        background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        font-size: 20px;
+        line-height: 30px;
+        padding-left: 50px;
+        margin-top: 20px;
+    }
+    #intro{
+        /*height: 300px;*/
+    }
+    #text{
+        /*height: 500px;*/
+    }
+</style>

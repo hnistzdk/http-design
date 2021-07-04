@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hnist.mapper.ArticleMapper">
+    <!--    在当前mapper.xml中使用二级缓存-->
+    <cache
+            eviction="FIFO"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+    <select id="getArticle" resultType="Article">
+        select * from http_article
+        <where>
+            <if test="userId!=null">
+                http_article.user_id=#{userId}
+            </if>
+        </where>
+        limit #{start},5;
+    </select>
+    <insert id="addArticle" parameterType="Article">
+        insert into http_article (user_id, article_title, article_intro,article_text, article_up, article_collection,
+                                  article_share,article_time)
+        values (#{userId},#{articleTitle},#{articleIntro},#{articleText},0,0,0,#{articleTime});
+    </insert>
+    <update id="updateArticle" parameterType="Article">
+        update http_article
+        <set>
+            <if test="articleTitle!=null">
+                http_article.article_title =#{articleTitle},
+            </if>
+            <if test="articleIntro!=null">
+                http_article.article_intro =#{articleIntro},
+            </if>
+            <if test="articleText!=null">
+                http_article.article_text =#{articleText},
+            </if>
+            <if test="articleUp!=null">
+                http_article.article_up =http_article.article_up+1,
+            </if>
+            <if test="articleCollection!=null">
+                http_article.article_collection =http_article.article_collection+1,
+            </if>
+            <if test="articleShare!=null">
+                http_article.article_share=http_article.article_share+1
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <select id="getArticleById" resultType="Article">
+        select *
+        from http_article
+        <where>
+            <if test="id!=null">
+                http_article.id=#{id}
+            </if>
+            <if test="username!=null">
+                and http_article.user_id=#{username}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from http_article;
+    </select>
+</mapper>

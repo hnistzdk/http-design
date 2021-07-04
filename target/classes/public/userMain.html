@@ -1,0 +1,891 @@
+
+<html>
+<head>
+    <script type="text/javascript" src="../jquery-3.4.1.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="https://www.layuicdn.com/layui/css/layui.css" />
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <meta charset="utf-8">
+    <title>myBlog</title>
+    <link rel="stylesheet" type="text/css">
+</head>
+
+<body onload="getAllArticle(),getCount(),getAuthName()">
+<div class="container">
+    <div class="header">
+
+
+        <!--导航栏菜单  -->
+        <div class="menu">
+            <ul class="heads">
+                <li><a href=".">首页</a></li>
+                <li><a href=".">博客</a></li>
+                <li><a href="https://www.github.com">GitHub</a></li>
+                <li><a href="https://www.gitee.com">码云</a></li>
+            </ul>
+
+
+        </div>
+        <!-- 写博客 -->
+        <div class="other">
+            <ul class="subtitle">
+                <!-- <li><a onclick="writeBlog()" style="margin-left:23px">写博客</a></li> -->
+                <li><button onclick="writeBlog()"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            style="margin-left:23px">写博客</button></li>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- 博客列表展示区 -->
+    <div class="main">
+        <h style="color: #40AFFE;">博客列表</h>
+
+        <!-- 博客栏 每页显示五条博客信息-->
+        <div class="lsclasse" id="main">
+            <div class="boxes">
+                <div class="artitlrtitle">
+                    <h class="title"
+                       onclick="articleTo(articles[0].id)"></h>
+                    <button type="button"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            onclick="blogEdit(articles[0].id,articles[0].userId,index0)">
+                        <i class="layui-icon layui-icon-edit"></i>
+                    </button>
+                </div>
+                <div class="content">
+                    <p class="introduce">
+                    </p>
+                </div>
+                <div class="time">
+                    <div class="oth">
+                        <span class="articleTime"></span>
+                        <span>点赞:</span> <span class="articleUp"></span>
+                        <span>收藏:</span><span class="articleShare"></span>
+                        <span>作者:</span><span class="articleAuth"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="boxes">
+                <div class="artitlrtitle">
+                    <h class="title"
+                       onclick="articleTo(articles[1].id)"></h>
+                    <button type="button"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            onclick="blogEdit(articles[1].id,articles[1].userId,index1)">
+                        <i class=" layui-icon layui-icon-edit "></i>
+                    </button>
+                </div>
+                <div class="content">
+                    <p class="introduce">
+                    </p>
+                </div>
+                <div class="time">
+                    <div class="oth">
+                        <span class="articleTime"></span>
+                        <span>点赞:</span> <span class="articleUp"></span>
+                        <span>收藏:</span><span class="articleShare"></span>
+                        <span>作者:</span><span class="articleAuth"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxes">
+                <div class="artitlrtitle">
+                    <h class="title "
+                       onclick="articleTo(articles[2].id) "></h>
+                    <button type="button"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            onclick="blogEdit(articles[2].id,articles[2].userId,index2)">
+                        <i class=" layui-icon layui-icon-edit "></i>
+                    </button>
+                </div>
+                <div class="content">
+                    <p class="introduce">
+                    </p>
+                </div>
+                <div class="time">
+                    <div class="oth">
+                        <span class="articleTime"></span>
+                        <span>点赞:</span> <span class="articleUp "></span>
+                        <span>收藏:</span><span class="articleShare "></span>
+                        <span>作者:</span><span class="articleAuth"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxes">
+                <div class="artitlrtitle">
+                    <h class="title "
+                       onclick="articleTo(articles[3].id)"></h>
+                    <button type="button"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            onclick="blogEdit(articles[3].id,articles[3].userId,index3)">
+                        <i class=" layui-icon layui-icon-edit "></i>
+                    </button>
+                </div>
+                <div class="content">
+                    <p class="introduce">
+                    </p>
+                </div>
+                <div class="time">
+                    <div class="oth">
+                        <span class="articleTime"></span>
+                        <span>点赞:</span> <span class="articleUp "></span>
+                        <span>收藏:</span><span class="articleShare "></span>
+                        <span>作者:</span><span class="articleAuth"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="boxes">
+                <div class="artitlrtitle">
+                    <h class="title "
+                       onclick="articleTo(articles[4].id)"></h>
+                    <button type="button"
+                            class="layui-btn layui-btn-danger layui-btn-sm"
+                            onclick="blogEdit(articles[4].id,articles[4].userId,index4)">
+                        <i class=" layui-icon layui-icon-edit "></i>
+                    </button>
+                </div>
+                <div class="content">
+                    <p class="introduce">
+                    </p>
+                </div>
+                <div class="time">
+                    <div class="oth">
+                        <span class="articleTime"></span>
+                        <span>点赞:</span> <span class="articleUp"></span>
+                        <span>收藏:</span><span class="articleShare"></span>
+                        <span>作者:</span><span class="articleAuth"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="page">
+                <div class="pages">
+                    当前有<span id="counts"></span>条数据/
+                    <span id="pages"></span>页
+                </div>
+                <div class="pages">
+                    跳转到
+                    <input id="page" type="number" min="1" value="1" style="width: 30px; ">页
+                    <button onclick="pagechange()" class="layui-btn layui-btn-normal layui-btn-sm">确定</button>
+                </div>
+            </div>
+
+        </div>
+        <!-- 用户介绍区 -->
+        <div class="rsclasse">
+            <div class="head">
+                <img a href=" " src="static/touxiang.jpg" alt=" " width="50" height="50" style="float:left "></a>
+                <p id="user">张振明</p>
+                <div class="four">
+                    <p class="yuan " style="word-spacing:22px;text-indent:6px; ">原创 粉丝 喜欢 码云 </p>
+                    <p class="num1 "> 8 </p>
+                    <p class="num2 "> 8 </p>
+                    <p class="num3 "> 8 </p>
+                    <p class="num4 "> 未开通 </p>
+                </div>
+            </div>
+
+
+
+            <div class="fenlei">
+                <h>课设介绍 </h>
+                <p><a class="ti1" href=". "> 名称</a></p>
+                <p class="tii1">博客</p>
+                <p><a class="ti1" href=". "> 设计者 </a></p>
+                <p class="tii1">zdk zzm</p>
+                <p><a class="ti1" href=". "> 完成时间 </a></p>
+                <p class="tii1">2021.5.18</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+<script>
+  let articles;
+  let count;
+  let index0=0,index1=1,index2=2,index3=3,index4=4;
+
+  // 获取文章的id
+  function articleTo(id) {
+    window.location.href = "vue.html?id=" + id;
+  }
+
+  //获取博客数量
+  function getCount() {
+    let xmlhttp;
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject(" Microsoft.XMLHTTP ");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        count = xmlhttp.responseText;
+        let cou = document.getElementById('counts');
+        let pages=document.getElementById('pages');
+        let page=document.getElementById('page');
+        cou.innerHTML = count;
+        if(count%5==0){
+          pages.innerText=parseInt(count,10)/5;
+          page.max=parseInt(count,10)/5;
+        }else {
+          pages.innerText=Math.floor(parseInt(count,10)/5)+1;
+          page.max=Math.floor(parseInt(count,10)/5)+1;
+        }
+      }
+    }
+    xmlhttp.open("GET", "http://localhost:4567/count", true);
+    xmlhttp.send();
+  }
+  function getAuthName(){
+
+    $.ajax({
+      url:"http://localhost:4567/authname",
+      type:"post",
+      success:function (data) {
+        //登陆后的姓名显示
+        let authName = document.getElementById('user');
+        if(JSON.parse(data).username==null){
+          authName.innerHTML = "游客";
+        }else{
+          authName.innerHTML = JSON.parse(data).username
+        }
+      },
+      error:function(){
+
+      }
+    });
+
+  }
+  //获取所有的博客
+  function getAllArticle() {
+    let xmlhttp;
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP ");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        articles = JSON.parse(xmlhttp.responseText)
+        console.log(articles);
+        let x = document.getElementsByClassName("introduce");
+        let y = document.getElementsByClassName('title');
+        let boxes = document.getElementsByClassName('boxes')
+        let time = document.getElementsByClassName('articleTime');
+        let up = document.getElementsByClassName('articleUp');
+        let Share = document.getElementsByClassName('articleShare');
+        let authName = document.getElementsByClassName('articleAuth');
+
+        for (let i = 0; i < articles.length; i++) {
+          if (articles[i].id == null) {
+            boxes[i].style.display = 'none';
+          } else {
+            boxes[i].style.display = '';
+            x[i].innerHTML = articles[i].articleIntro;
+            y[i].innerHTML = articles[i].articleTitle;
+            time[i].innerHTML = articles[i].articleTime;
+            up[i].innerHTML = articles[i].articleUp;
+            Share[i].innerHTML = articles[i].articleShare;
+            authName[i].innerHTML = articles[i].userId;
+          }
+        }
+      }
+    }
+    xmlhttp.open("GET", "http://localhost:4567/articles/1", true);
+    xmlhttp.send();
+  }
+  //分页操作时，向后台发送请求，得到新的博客
+  function pagechange() {
+    const newpage = document.getElementById("page").value;
+    var xmlhttp;
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        articles = JSON.parse(xmlhttp.responseText)
+        console.log(articles);
+        let x = document.getElementsByClassName("introduce");
+        let y = document.getElementsByClassName('title');
+        let boxes = document.getElementsByClassName('boxes')
+        let time = document.getElementsByClassName('articleTime');
+        let up = document.getElementsByClassName('articleUp');
+        let Share = document.getElementsByClassName('articleShare');
+        for (let i = 0; i < articles.length; i++) {
+          if (articles[i].id == null) {
+            boxes[i].style.display = 'none';
+          } else {
+            boxes[i].style.display = '';
+            x[i].innerHTML = articles[i].articleIntro;
+            y[i].innerHTML = articles[i].articleTitle;
+            time[i].innerHTML = articles[i].articleTime;
+            up[i].innerHTML = articles[i].articleUp;
+            Share[i].innerHTML = articles[i].articleShare;
+          }
+        }
+      }
+    }
+    xmlhttp.open("GET", "http://localhost:4567/articles/" + newpage, true);
+    xmlhttp.send();
+  }
+
+
+  function getArticleByUser() {
+    let xmlhttp;
+    if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp = new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP ");
+    }
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        articles = JSON.parse(xmlhttp.responseText)
+        console.log(articles);
+        let x = document.getElementsByClassName("introduce ");
+        let y = document.getElementsByClassName('title');
+        let boxes = document.getElementsByClassName('boxes')
+        let time = document.getElementsByClassName('articleTime');
+        let up = document.getElementsByClassName('articleUp');
+        let Share = document.getElementsByClassName('articleShare');
+        for (let i = 0; i < articles.length; i++) {
+          if (articles[i].id == null) {
+            boxes[i].style.display = 'none';
+          } else {
+            boxes[i].style.display = '';
+            x[i].innerHTML = articles[i].articleIntro;
+            y[i].innerHTML = articles[i].articleTitle;
+            time[i].innerHTML = articles[i].articleTime;
+            up[i].innerHTML = articles[i].articleUp;
+            Share[i].innerHTML = articles[i].articleShare;
+          }
+        }
+      }
+    }
+    xmlhttp.open("GET", "http://localhost:4567/article", true);
+    xmlhttp.send();
+  }
+  // 写博客时，向后台发送请求
+  function writeBlog() {
+    $.ajax({
+      url:"http://localhost:4567/article/intoAdd",
+      type:"post",
+      success:function () {
+        layer.open({
+          type: 1,
+          title: "写博客 ",
+          area: ['700px', '550px'],
+          closeBtn: 1,
+          offset:'100px',
+          shadeClose: true,
+          skin: 'yourclass',
+          content: '<form class="layui-form" method="post" enctype="multipart/form-data" action="/article/add">\n' +
+            '    <div class="layui-form-item ">\n' +
+            '        <label class="layui-form-label ">标题</label>\n' +
+            '        <div class="layui-input-block ">\n' +
+            '            <input type="text " name="articleTitle" required lay-verify="required " placeholder="请输入博客标题 " autocomplete="off " class="layui-input " style="width:507.2px">\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item ">\n' +
+            '        <label class="layui-form-label ">简介</label>\n' +
+            '        <div class="layui-input-block ">\n' +
+            '            <textarea name="articleIntro"  cols="70 " rows="5 "style=" border:solid 1px rgb(238,238,238); "></textarea>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item">\n' +
+            '        <label class="layui-form-label">内容</label>\n' +
+            '        <div class="layui-input-block">\n' +
+            '            <textarea name="articleText" cols="70 " rows="15 "style=" border:solid 1px rgb(238,238,238); "></textarea>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item">\n' +
+            '        <div class="layui-input-block">\n' +
+            '            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
+            '                <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '\n' +
+            '</form>'
+        });
+      },
+      error:function () {
+        alert("登录后才能发表文章");
+      }
+    });
+  }
+  // 编辑博客时，向后台发送请求
+  function blogEdit(id,userId,index) {
+    $.ajax({
+      url:"http://localhost:4567/article/edit/"+id+"/"+userId,
+      type:"post",
+      success:function (data) {
+        let obj=JSON.parse(data);
+        console.log("status"+obj.status);
+        layer.open({
+          type: 1,
+          title: "写博客 ",
+          area: ['700px', '550px'],
+          closeBtn: 1,
+          shadeClose: true,
+          offset:'100px',
+          skin: 'yourclass',
+          content:'<form class="layui-form" id="updateForm" method="post" onsubmit="return false">\n' +
+            '    <input type="hidden" id="toId" name="toId">\n' +
+            '    <div class="layui-form-item ">\n' +
+            '        <label class="layui-form-label ">标题</label>\n' +
+            '        <div class="layui-input-block ">\n' +
+            '            <input id="editTitle" type="text" name="articleTitle" required lay-verify="required" placeholder="请输入博客标题 "\n' +
+            '                   autocomplete="off " class="layui-input " style="width:507.2px">\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item">\n' +
+            '        <label class="layui-form-label ">简介</label>\n' +
+            '        <div class="layui-input-block ">\n' +
+            '            <textarea id="editIntro" name="articleIntro" cols="70 " rows="5 "\n' +
+            '                      style=" border:solid 1px rgb(238,238,238); "></textarea>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item ">\n' +
+            '        <label class="layui-form-label ">内容</label>\n' +
+            '        <div class="layui-input-block ">\n' +
+            '            <textarea id="editText" name="articleText" cols="70 " rows="15 "\n' +
+            '                      style=" border:solid 1px rgb(238,238,238); "></textarea>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <div class="layui-form-item">\n' +
+            '        <div class="layui-input-block">\n' +
+            '            <button class="layui-btn" type="submit" id="submit" onclick="update()">立即提交</button>\n' +
+            '            <button type="reset" class="layui-btn layui-btn-primary ">重置</button>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '</form>'
+        });
+        let toId=document.getElementById('toId');
+        let editTitle = document.getElementById('editTitle');
+        let editIntro = document.getElementById('editIntro');
+        let editText = document.getElementById('editText');
+        console.log("edit中的articles"+articles)
+        toId.value=articles[index].id;
+        console.log("toId.value"+toId.value);
+        editTitle.value = articles[index].articleTitle;
+        editIntro.innerHTML = articles[index].articleIntro;
+        editText.innerHTML = articles[index].articleText;
+      },
+      error:function () {
+        alert("你无权编辑此文章");
+      }
+    });
+  }
+
+  function update () {
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost:4567/article/update',
+      // dataType:"multipart/form-data",
+      // data: JSON.stringify({username:$('#username').val(),password:$('#password').val()}),
+      data: $('#updateForm').serialize(),
+      success: function (data) {
+        if (JSON.parse(data).status != 200) {
+          alert(JSON.parse(data).msg);
+        } else {
+          alert(JSON.parse(data).msg);
+          window.location.href = 'userMain.html';
+        }
+      },
+      error: function () {
+        alert('操作异常!')
+      }
+    })
+  }
+</script>
+<style>
+    .introduce {
+        color: black;
+        font-size:50px ;
+    }
+    .page{
+        margin-top: 100px;
+    }
+    .pages{
+        margin-top: 20px;
+    }
+    .title :hover{
+        color: red;
+    }
+    .title{
+        font-size: 40px;
+    }
+    .boxes{
+        background-color: #8BC6EC;
+        background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+        padding:0 ;
+        border: 1px solid black;
+
+    }
+    .boxes button {
+        float: right;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 1349px;
+        height: 1500px;
+        background-color: #eee;
+    }
+
+    .header {
+        background-color: white;
+        height: 50px;
+        width:1500px;
+        background-color: #FFDEE9;
+        background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+
+    }
+
+
+    .header .heads li {
+        height: 50px;
+        line-height: 50px;
+        font-size: 15px;
+        margin-left: 20px;
+        margin-right: 10px;
+        list-style-type: none;
+        float: left;
+    }
+
+    .heads li a:link {
+        color: black;
+        text-decoration: none;
+    }
+
+    .heads li a:hover {
+        color: red;
+    }
+
+    .header .subtitle li {
+        height: 50px;
+        line-height: 50px;
+        float: right;
+        list-style-type: none;
+        font-size: 15px;
+        margin-right: 10px;
+        color: black;
+    }
+
+    .subtitle li a:link {
+        color: black;
+        text-decoration: none;
+    }
+
+    .subtitle li a:hover {
+        color: red;
+    }
+
+    .main {
+        width: 1500px;
+        height: 1500px;
+        background-color: #FFDEE9;
+        background-image: linear-gradient(180deg, #FFDEE9 0%, #B5FFFC 100%);
+
+    }
+
+    .main h {
+        margin: 50px 900px 50px 80px;
+        font-size: 40px;
+        float: left;
+    }
+
+    .main .mana li {
+        float: left;
+        margin-right: 20px;
+        margin-top: 40px;
+        list-style-type: none;
+        font-size: 15px;
+        color: white;
+    }
+
+    .mana li a {
+        border: 1px solid white;
+        padding: 2px;
+        color: white;
+        text-decoration: none;
+    }
+    #main{
+        background-color: #FFDEE9;
+        background-image: linear-gradient(225deg, #FFDEE9 0%, #B5FFFC 100%);
+
+
+    }
+
+    .mana a:hover {
+        background: red;
+        color: white;
+    }
+
+    .lsclasse {
+        width: 800px;
+        height: 700px;
+
+        margin: 0px 50px 50px 80px;
+        padding: 5px;
+        float: left;
+
+
+    }
+
+    .rsclasse {
+        width: 300px;
+        height: 700px;
+        background: white;
+        float: left;
+        background-color: #FAACA8;
+        background-image: linear-gradient(315deg, #FAACA8 0%, #DDD6F3 100%);
+
+    }
+
+    .state h {
+        margin: 20px 400px 20px 15px;
+        color: #999;
+        font-size: 18px;
+        border: 1px solid gray;
+        padding: 2px;
+        font-family: 'PingFang SC', 'Microsoft YaHei', SimHei, Arial, SimSun;
+    }
+
+    .state img {
+        margin: 20px 20px 10px 15px;
+    }
+
+    .artitlrtitle h {
+        font-size: 30px;
+        margin: 10px 200px 10px 15px;
+        float: left;
+        clear: both;
+    }
+    .artitlrtitle h:hover {
+        color: red;
+        cursor:pointer;
+    }
+
+    .content p {
+        font-size: 15px;
+        margin: 5px 15px;
+        clear: both;
+        color: #666565;
+    }
+    .content button {
+        margin-top: 0;
+    }
+
+    /*.time h {*/
+    /*    !*margin: 0;*!*/
+    /*    font-size: 15px;*/
+    /*    float: left;*/
+    /*    color: #999;*/
+    /*    margin-left: 20px;*/
+    /*}*/
+
+    .time .oth {
+        margin-left: 20px;
+        /*margin: 0;*/
+        font-size: 15px;
+        color: #666565;
+    }
+
+    .head img {
+        margin: 15px;
+    }
+
+    .head p {
+        float: left;
+        font-size: 20px;
+        margin: 30px 10px;
+        color: #999;
+    }
+
+    .four .yuan {
+        font-size: 16px;
+        margin: 5px 10px 10px 40px;
+        color: gray;
+        float: left;
+    }
+
+    .four .num1 {
+        font-size: 14px;
+        margin: 5px 6px 20px 51px;
+        color: #999;
+    }
+
+    .four .num2 {
+        font-size: 14px;
+        margin: 5px 7px 20px 50px;
+        color: #999;
+    }
+
+    .four .num3 {
+        font-size: 14px;
+        margin: 5px 7px 20px 46px;
+        color: #999;
+    }
+
+    .four .num4 {
+        font-size: 14px;
+        margin: 5px 7px 20px 29px;
+        color: #999;
+    }
+
+    .intro {
+        height: 260px;
+        width: 300px;
+        margin-top: 10px;
+    }
+
+    .intro .ff {
+        font-size: 10px;
+        margin: 5px 20px;
+        clear: both;
+    }
+
+    .fenlei h {
+        font-size: 15px;
+        float: left;
+        margin: 10px 20px;
+    }
+
+    .fenlei p .ti1 {
+        float: left;
+        clear: left;
+        font-size: 10px;
+        margin: 5px 20px;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .fenlei p .ti1:hover {
+        color: red;
+    }
+
+    .fenlei .tii1 {
+        float: right;
+        clear: right;
+        font-size: 8px;
+        margin: 5px 20px;
+        color: #bbb;
+    }
+
+    .cundang h {
+        font-size: 15px;
+        float: left;
+        clear: left;
+        margin: 20px 20px;
+    }
+
+    .cundang p .ti1 {
+        float: left;
+        clear: left;
+        font-size: 10px;
+        margin: 5px 20px;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .cundang p .ti1:hover {
+        color: red;
+    }
+
+    .cundang .tii1 {
+        float: right;
+        clear: right;
+        font-size: 8px;
+        margin: 5px 20px;
+        color: #bbb;
+    }
+
+    .paiming h {
+        font-size: 15px;
+        float: left;
+        clear: left;
+        margin: 20px 20px;
+    }
+
+    .pm .tiname {
+        float: left;
+        clear: left;
+        font-size: 15px;
+        margin: 5px 20px;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .pm .tiname:hover {
+        color: red;
+    }
+
+    .pm .tinum {
+        float: left;
+        clear: left;
+        font-size: 8px;
+        margin: 3px 20px;
+        color: #bbb;
+    }
+
+    .callus h {
+        font-size: 15px;
+        float: left;
+        clear: left;
+        margin: 20px 20px;
+    }
+
+    .callus .us {
+        font-size: 10px;
+        margin: 5px 2px 5px 20px;
+        float: left;
+        clear: left;
+    }
+
+    .callus .weibo {
+        font-size: 10px;
+        margin: 5px 5px;
+        padding-right: 80px;
+        float: right;
+        clear: right;
+    }
+
+    .callus .us1 {
+        font-size: 10px;
+        margin: 5px 20px;
+        float: left;
+        clear: left;
+    }
+
+    .callus .oo1 {
+        margin: 40px 80px 10px 80px;
+        font-size: 10px;
+        float: left;
+        clear: left;
+    }
+
+    .callus .oo2 {
+        margin: 10px 80px 10px 80px;
+        font-size: 10px;
+        float: left;
+        clear: left;
+    }
+</style>

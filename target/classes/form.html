@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form class="layui-form" method="post" onsubmit="return false">
+    <input type="hidden" id="toId" name="toId">
+    <div class="layui-form-item ">
+        <label class="layui-form-label ">标题</label>
+        <div class="layui-input-block ">
+            <input id="editTitle" type="text" name="articleTitle" required lay-verify="required" placeholder="请输入博客标题 "
+                   autocomplete="off " class="layui-input " style="width:507.2px">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">简介</label>
+        <div class="layui-input-block ">
+            <textarea id="editIntro" name="articleIntro" cols="70 " rows="5 "
+                      style=" border:solid 1px rgb(238,238,238); "></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label ">内容</label>
+        <div class="layui-input-block ">
+            <textarea id="editText" name="articleText" cols="70 " rows="15 "
+                      style=" border:solid 1px rgb(238,238,238); "></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" type="submit" id="submit" onclick="">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary ">重置</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
